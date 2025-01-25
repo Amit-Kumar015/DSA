@@ -26,8 +26,21 @@ public:
 };
 */
 
+Node* middle(Node* head){
+    Node* slow = head;
+    Node* fast = head;
+
+    while(fast != NULL && fast->next != NULL){
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+
+    return slow;
+}
+
 Node *findMiddle(Node *head) {
-    // Write your code here
+    // Approach 1
+
     if(!head){
         return NULL;
     }
@@ -49,5 +62,9 @@ Node *findMiddle(Node *head) {
     }
 
     return curr;
+
+    // Approach 2
+
+    return middle(head);    
 }
 
