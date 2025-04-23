@@ -62,7 +62,7 @@ class Queen : public Piece {
 public:
     bool isValidMove(Position from, Position to) override {
         return (from.x == to.x || from.y == to.y || 
-                abs(to.x - from.x) == abs(to.y - from.y));
+        abs(to.x - from.x) == abs(to.y - from.y));
     }
 };
 
