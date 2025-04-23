@@ -19,12 +19,12 @@ public:
 };
 
 struct Move {
-    string pieceName;
+    string name;
     string from;
     string to;
 
     void display() const {
-        cout << "Last move: " << pieceName << " from " << from << " to " << to << endl;
+        cout << "Last move: " << name << " from " << from << " to " << to << endl;
     }
 };
 
@@ -84,13 +84,13 @@ unique_ptr<Piece> createPiece(const string& name) {
 }
 
 int main() {
-    string pieceName, fromStr, toStr;
+    string name, fromStr, toStr;
     Move lastMove;
     bool hasLastMove = false;
     cout << "Enter move: ";
-    cin >> pieceName >> fromStr >> toStr;
+    cin >> name >> fromStr >> toStr;
 
-    auto piece = createPiece(pieceName);
+    auto piece = createPiece(name);
     if (!piece) {
         cout << "Invalid piece name.\n";
         return 1;
@@ -99,7 +99,7 @@ int main() {
     Position from(fromStr), to(toStr);
     if (piece->isValidMove(from, to)) {
         cout << "Valid move\n";
-        lastMove = {pieceName, fromStr, toStr};
+        lastMove = {name, fromStr, toStr};
         hasLastMove = true;
     } else {
         cout << "Invalid move\n";
