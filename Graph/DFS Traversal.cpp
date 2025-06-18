@@ -27,11 +27,13 @@ vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
         adj[v].push_back(u);
     }
 
+    // ans is storing dfs traversal of diff components
     vector<vector<int>> ans;
     unordered_map<int, bool> visited; 
 
     for(int i=0; i<V; i++){
         if(!visited[i]){
+            // using component vector to store each component dfs traversal
             vector<int> component;
             dfs(adj, visited, component, i);
             ans.push_back(component);
