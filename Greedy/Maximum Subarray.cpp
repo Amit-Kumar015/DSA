@@ -38,7 +38,7 @@ private:
             rightSum = max(rightSum, curSum);
         }
 
-        return max(dfs(nums, l, m-1), max(dfs(nums, m+1, r), leftSum +     nums[m] + rightSum));
+        return max(dfs(nums, l, m-1), max(dfs(nums, m+1, r), leftSum + nums[m] + rightSum));
     }
 public:
     int maxSubArray(vector<int>& nums) {
