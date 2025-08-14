@@ -5,33 +5,26 @@ public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
         int s = newInterval[0];
         int e = newInterval[1];
-        vector<vector<int>> ans;
-        bool inserted = false;
+        int n = intervals.size();
+        vector<vector<int>> res;
 
-        for(int i=0; i<intervals.size(); i++){
-            if(s < intervals[i][0] && e > intervals[i][1]){
-                continue;
+        for(int i=0; i<n; i++){
+            if(intervals[i][0] > e){
+                res.push_back({s, e});
+                copy(intervals.begin() + i, intervals.end(), back_inserter(res));
+                return res;
             }
-            else if((s >= intervals[i][0] && s <= intervals[i][1]) || 
-            (e >= intervals[i][0] && e <= intervals[i][1])){
+            else if(intervals[i][1] < s){
+                res.push_back(intervals[i]);
+            }
+            else{
                 s = min(intervals[i][0], s);
                 e = max(intervals[i][1], e);
             }
-            else if(e < intervals[i][0] && !inserted){
-                ans.push_back({s, e});
-                ans.push_back(intervals[i]);
-                inserted = true;
-            }
-            else{
-                ans.push_back(intervals[i]);
-            }
         }
 
-        if(!inserted){
-            ans.push_back({s, e});
-        }
-
-        return ans;
+        res.push_back({s, e});
+        return res;
     }
 };
 

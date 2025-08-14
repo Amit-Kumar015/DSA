@@ -3,22 +3,20 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        int n = intervals.size();
-        int s = -1, e = -1;
-        vector<vector<int>> ans;
         sort(intervals.begin(), intervals.end());
+        vector<vector<int>> ans;
+        ans.push_back(intervals[0]);
 
-        for(int i=0; i<n; i++){
-            if(intervals[i][0] <= e){
-                s = min(intervals[i][0], s);
-                e = max(intervals[i][1], e);
-                ans.pop_back();
-                ans.push_back({s, e});
+        for(auto& interval: intervals){
+            int start = interval[0];
+            int end = interval[1];
+            int lastEnd = ans.back()[1];
+
+            if(start <= lastEnd){
+                ans.back()[1] = max(lastEnd, end);
             }
             else{
-                ans.push_back(intervals[i]);
-                s = intervals[i][0];
-                e = intervals[i][1];
+                ans.push_back(interval);
             }
         }
 
